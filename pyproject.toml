@@ -10,6 +10,8 @@ python = "^3.12"
 pandas = "^2.2.2"
 scikit-learn = "^1.4.2"
 evidently = "^0.4.20"
+fastapi = "^0.111.0"
+openpyxl = "^3.1.2"
 
 
 [build-system]

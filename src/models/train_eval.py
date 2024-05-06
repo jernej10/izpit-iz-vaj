@@ -25,10 +25,17 @@ def preprocess_data(data):
         ('imputer', SimpleImputer(strategy='most_frequent')),
         ('onehot', OneHotEncoder(handle_unknown='ignore'))])
 
+    #categorical_transformer = Pipeline(steps=[
+    #    ('imputer', SimpleImputer(strategy='most_frequent')),
+    #    ('onehot', OneHotEncoder(handle_unknown='ignore'))])
     preprocessor = ColumnTransformer(
         transformers=[
             ('num', numeric_transformer, numeric_features),
             ('cat', categorical_transformer, categorical_features)])
+
+
+    for col in features.columns:
+        print(col)
 
     X_train = preprocessor.fit_transform(features)
     y_train = target
@@ -48,7 +55,7 @@ def save_model(model, filepath):
     print("Model je bil uspešno shranjen.")
 
 def main():
-    data = pd.read_csv("../../data/processed/current_data.csv")
+    data = pd.read_csv("../../data/processed/current_data.csv", index_col=0)
     X_train, y_train, preprocessor = preprocess_data(data)
     model = train_model(X_train, y_train)
 
